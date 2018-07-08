@@ -2,7 +2,11 @@ import { Router } from 'express';
 import AWS from 'aws-sdk';
 const events = Router();
 
-AWS.config.loadFromPath('./secret/cred.json');
+AWS.config.update({
+  "accessKeyId": "AKIAJELXJUOQ6F5AMIYQ",
+  "secretAccessKey": "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",
+  "region": "us-east-2"
+});
 const ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 const ddbc = new AWS.DynamoDB.DocumentClient();
 const dbname = 'helios-photo';
