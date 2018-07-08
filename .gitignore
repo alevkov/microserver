@@ -1,4 +1,4 @@
-# Logs
+i# Logs
 logs
 *.log
 npm-debug.log*
@@ -7,6 +7,9 @@ yarn-error.log*
 
 # Credentials
 secret/
+
+# Build Artifacts
+dist/
 
 # Runtime data
 pids
