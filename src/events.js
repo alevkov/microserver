@@ -9,7 +9,6 @@ AWS.config.update({
 });
 const ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 const ddbc = new AWS.DynamoDB.DocumentClient();
-const dbname = 'helios-photo';
 
 /**
  * GET photos by id
@@ -19,7 +18,7 @@ events.get('/:eventId', (req, res) => {
     ExpressionAttributeValues: {":eventId": req.params.eventId},
     FilterExpression: "EventID = :eventId",
     ProjectionExpression: "PhotoID",
-    TableName: dbname
+    TableName: "helios-photo"
   };
 
   ddbc.scan(params, (err, result) => {
@@ -37,7 +36,7 @@ events.get('/:eventId', (req, res) => {
  */
 events.post('/:eventId', (req, res) => {
   const params = {
-    TableName: dbname,
+    TableName: "helios-photo",
     Item: {
       'PhotoID': {S: req.body.photoUrl},
       'EventID': {S: req.params.eventId}
@@ -63,7 +62,7 @@ events.get('/delete/:eventId', (req, res) => {
     ExpressionAttributeValues: {":eventId": req.params.eventId},
     FilterExpression: "EventID = :eventId",
     ProjectionExpression: "PhotoID",
-    TableName: dbname
+    TableName: "helios-photo"
   };
 
   ddbc.scan(params, (err, result) => {
@@ -82,9 +81,10 @@ events.get('/delete/:eventId', (req, res) => {
       }
       const delParams = {
         RequestItems: {
-          dbname: itemsToDelete
+          "helios-photo": itemsToDelete
         }
       }
+      console.log(delParams);
       ddbc.batchWrite(delParams, (deleteErr, deleteResult) =>{
         if (deleteErr) {
           res.status(500).send({ message: deleteErr });
