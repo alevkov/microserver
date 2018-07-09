@@ -58,7 +58,7 @@ events.post('/:eventId', (req, res) => {
 /**
  * DELETE all photos by eventId
  */
-events.delete('/:eventId', (req, res) => {
+events.get('/delete/:eventId', (req, res) => {
   const params = {
     ExpressionAttributeValues: {":eventId": req.params.eventId},
     FilterExpression: "EventID = :eventId",
