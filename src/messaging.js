@@ -22,7 +22,8 @@ messaging.post('/send', (req, res) => {
    })
    .catch(e => { 
       console.error('Got an error:', e.code, e.message); 
-    });
+      res.status(500).send({error: e.message});
+    })
    .done();
 });
 
