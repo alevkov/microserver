@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import index from './index';
 import events from './events';
 import messaging from './messaging';
+import email from './email';
 
 const app = express();
 app.disable('x-powered-by');
@@ -30,6 +31,7 @@ app.all('/*', function(req, res, next) {
 app.use('/', index);
 app.use('/events', events);
 app.use('/messaging', messaging);
+app.use('/email', email);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
