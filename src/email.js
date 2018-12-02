@@ -20,10 +20,10 @@ email.post('/send', (req, res) => {
 
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      res.status(500).send({error: error});
+      res.status(500).json({error: error});
     } else {
-      console.log('Email sent: ' + info.response);
-      res.status(200).send({sid: message, status: info.response});
+      console.log('Email sent: ' + req.body.emailRecepient);
+      res.status(200).json({"message": "Email Sent!"});
     }
   }); 
 });
