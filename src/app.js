@@ -6,6 +6,7 @@ import index from './index';
 import events from './events';
 import messaging from './messaging';
 import email from './email';
+var cors = require('cors');
 
 const app = express();
 app.disable('x-powered-by');
@@ -20,6 +21,7 @@ app.use(logger('dev', {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(cors());
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
