@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "dist/www.js",
   "engines": {
-    "node": "~6.9.1",
+    "node": "~8.1",
     "npm": ">=3.10.0"
   },
   "scripts": {
