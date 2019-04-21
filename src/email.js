@@ -3,29 +3,38 @@ const nodemailer = require('nodemailer');
 const email = Router();
 
 email.post('/send', (req, res) => {
-  var transporter = nodemailer.createTransport({
-    service: 'AOL',
-    auth: {
-      user: 'helios.events@aol.com',
-      pass: 'sound19veer'
-    }
-  });
+  console.log(req.body);
+const mailjet = require ('node-mailjet')
+    .connect('f3a535af49982f605366737c4de10e3c', '5988a995f24fca55d962a0c3d97d61c5')
+const request = mailjet
+    .post("send", {'version': 'v3.1'})
+    .request({
+        "Messages":[
+                {
+                        "From": {
+                                "Email": "helios.event.gallery@gmail.com",
+                                "Name": "Event Photos"
+                        },
+                        "To": [
+                                {
+                                        "Email": `${req.body.emailRecepient}`,
+                                        "Name": ``
+                                }
+                        ],
+                        "Subject": "Check out these photos!",
+                        "TextPart": `${req.body.emailBody}`,
+                        "HTMLPart": ""
+                }
+        ]
+    })
+request
+    .then((result) => {
+        res.status(200).json({success: result});
+    })
+    .catch((err) => {
+        res.status(500).json({error: err});
+    })
 
-  var mailOptions = {
-    from: 'helios.event.station@gmail.com',
-    to: req.body.emailRecepient,
-    subject: 'Check out these photos!',
-    text: req.body.emailBody
-  };
-
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) {
-      res.status(500).json({error: error});
-    } else {
-      console.log('Email sent: ' + req.body.emailRecepient);
-      res.status(200).json({"message": "Email Sent!"});
-    }
-  }); 
 });
 
 export default email;
