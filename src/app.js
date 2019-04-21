@@ -5,6 +5,9 @@ import bodyParser from 'body-parser';
 import index from './index';
 import events from './events';
 import messaging from './messaging';
+import email from './email';
+import password from './password';
+var cors = require('cors');
 
 const app = express();
 app.disable('x-powered-by');
@@ -19,6 +22,7 @@ app.use(logger('dev', {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(cors());
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -30,6 +34,8 @@ app.all('/*', function(req, res, next) {
 app.use('/', index);
 app.use('/events', events);
 app.use('/messaging', messaging);
+app.use('/email', email);
+app.use('/password', password);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {

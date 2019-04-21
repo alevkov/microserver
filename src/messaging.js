@@ -20,6 +20,10 @@ messaging.post('/send', (req, res) => {
    .then(message => {
       res.status(200).send({sid: message, status: "success"});
    })
+   .catch(e => { 
+      console.error('Got an error:', e.code, e.message); 
+      res.status(500).send({error: e.message});
+    })
    .done();
 });
 
