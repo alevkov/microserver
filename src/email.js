@@ -4,10 +4,10 @@ const email = Router();
 
 email.post('/send', (req, res) => {
   var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'AOL',
     auth: {
-      user: 'helios.event.gallery@gmail.com',
-      pass: 'This1sabadpassword!'
+      user: 'helios.events@aol.com',
+      pass: 'sound19veer'
     }
   });
 
