@@ -3,9 +3,9 @@ import AWS from 'aws-sdk';
 const events = Router();
 
 AWS.config.update({
-  "accessKeyId": "AKIAIXRLQLXZXCINEXTQ",
-  "secretAccessKey": "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",
-  "region": "us-east-2"
+  "accessKeyId": "",
+  "secretAccessKey": "",
+  "region": ""
 });
 const ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 const ddbc = new AWS.DynamoDB.DocumentClient();
