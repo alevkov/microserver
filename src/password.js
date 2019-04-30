@@ -8,8 +8,9 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   if (err) {
     console.log(err);
+  } else {
+    eventCollection = client.db("helios").collection("event");
   }
-  eventCollection = client.db("helios").collection("event");
 });
 
 password.post('/:eventId', (req, res) => {
