@@ -1,10 +1,8 @@
 import { Router } from 'express';
 
 const messaging = Router();
-const sid = 'ACb1b80ea9efd602091eb0abe6c05ed979';
-const authToken = '0aa3c6b463846d454d21de27ca74656c';
-const twilioNumber = '+19549086944';
-const client = require('twilio')(sid, authToken);
+const twilioNumber = '+12058831771';
+const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
 
 /**
  * GET example request
@@ -20,6 +18,10 @@ messaging.post('/send', (req, res) => {
    .then(message => {
       res.status(200).send({sid: message, status: "success"});
    })
+   .catch(e => { 
+      console.error('Got an error:', e.code, e.message); 
+      res.status(500).send({error: e.message});
+    })
    .done();
 });
 
